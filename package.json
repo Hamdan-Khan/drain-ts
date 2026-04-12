@@ -1,0 +1,35 @@
+{
+  "name": "drain-ts",
+  "version": "0.1.0",
+  "description": "Drain3 log template clustering algorithm in Typescript",
+  "keywords": [
+    "drain",
+    "log",
+    "parsing",
+    "clustering",
+    "monitoring"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "typescript": "^6.0.2",
+    "vitest": "^1.6.0"
+  }
+}
