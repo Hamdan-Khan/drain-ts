@@ -1,12 +1,10 @@
-export interface LogCluster {
+export interface LogClusterInterface {
   id: number;
   template: string[];
   size: number;
 }
 
-export type NodeChildren = Map<string, DrainNode>;
-
-export interface DrainNode {
-  children: NodeChildren;
-  clusters: LogCluster[];
+export interface NodeInterface {
+  children: Map<string, NodeInterface>;
+  clusterIds: number[];
 }
