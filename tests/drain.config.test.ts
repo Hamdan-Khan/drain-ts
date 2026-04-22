@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { Drain, DrainBase } from "../src/index.js";
+import { Drain } from "../src/drain/drain.js";
+import { DrainBase } from "../src/drain/drainBase.js";
 
 describe("Drain constructor and config", () => {
   it("uses expected default values", () => {

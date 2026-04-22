@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { Drain } from "../src/index.js";
+import { Drain } from "../src/drain/drain.js";
 
 describe("Drain.addLogMessage", () => {
   it("routes by token length so different lengths do not collide", () => {

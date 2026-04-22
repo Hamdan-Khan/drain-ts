@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { Drain } from "../src/index.js";
+import { Drain } from "../src/drain/drain.js";
 import { drainDatasets } from "./fixtures/logDatasets.js";
 
 describe("Drain real-world dataset cases", () => {

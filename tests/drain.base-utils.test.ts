@@ -1,6 +1,6 @@
 import { Writable } from "node:stream";
 import { describe, expect, it, vi } from "vitest";
-import { Drain } from "../src/index.js";
+import { Drain } from "../src/drain/drain.js";
 
 describe("DrainBase public utility behavior", () => {
   it("enforces maxClusters and updates LRU order on cluster access", () => {
