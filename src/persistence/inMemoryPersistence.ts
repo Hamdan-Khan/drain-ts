@@ -25,4 +25,8 @@ export class InMemoryPersistenceHandler extends PersistenceHandler {
    * No-op for the in-memory backend.
    */
   async close(): Promise<void> {}
+
+  async delete(): Promise<void> {
+    this.state = null;
+  }
 }

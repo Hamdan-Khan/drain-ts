@@ -72,4 +72,11 @@ export class RedisPersistenceHandler extends PersistenceHandler {
 
     await this.client.quit();
   }
+
+  /**
+   * Deletes the persisted state from Redis.
+   */
+  async delete(): Promise<void> {
+    await this.client.del(this.key);
+  }
 }

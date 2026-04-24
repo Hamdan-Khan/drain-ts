@@ -17,4 +17,9 @@ export abstract class PersistenceHandler {
    * Releases any resources held by the persistence backend.
    */
   abstract close(): Promise<void>;
+
+  /**
+   * Deletes the persisted state, if supported by the persistence strategy.
+   */
+  abstract delete(): Promise<void>;
 }
