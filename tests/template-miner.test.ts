@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   InMemoryPersistenceHandler,
+  RedisPersistenceHandler,
   TemplateMiner,
   TemplateMinerConfig,
 } from "../src/index.js";
@@ -94,6 +95,53 @@ describe("TemplateMiner", () => {
     expect(minerB.getTemplate("Payment for Carol failed")).toBe(
       "Payment for <*> failed",
     );
+
+    await minerA.close();
+    await minerB.close();
+  });
+
+  it("deleteState removes only the current miner persisted key", async () => {
+    const store = new Map<string, string>();
+    const client = {
+      set: async (key: string, value: string) => {
+        store.set(key, value);
+        return "OK";
+      },
+      get: async (key: string) => store.get(key) ?? null,
+      del: async (key: string) => {
+        store.delete(key);
+        return 1;
+      },
+      quit: async () => "OK",
+    };
+
+    const config = new TemplateMinerConfig({ snapshotIntervalMinutes: 0 });
+
+    const persistenceA = new RedisPersistenceHandler({
+      key: "drain:logSource:101",
+      client: client as never,
+    });
+    const persistenceB = new RedisPersistenceHandler({
+      key: "drain:logSource:202",
+      client: client as never,
+    });
+
+    const minerA = new TemplateMiner(config, persistenceA);
+    const minerB = new TemplateMiner(config, persistenceB);
+
+    await minerA.initialize();
+    await minerB.initialize();
+
+    await minerA.addLogMessage("service-A event 1");
+    await minerB.addLogMessage("service-B event 1");
+
+    await expect(persistenceA.load()).resolves.not.toBeNull();
+    await expect(persistenceB.load()).resolves.not.toBeNull();
+
+    await minerA.deleteState();
+
+    await expect(persistenceA.load()).resolves.toBeNull();
+    await expect(persistenceB.load()).resolves.not.toBeNull();
 
     await minerA.close();
     await minerB.close();

@@ -359,4 +359,15 @@ export class TemplateMiner {
 
     this.restoreDrainFromState(JSON.parse(raw) as DrainState);
   }
+
+  /**
+   * Delets the persisted state from the configured persistence backend, if supported.
+   */
+  public async deleteState(): Promise<void> {
+    if (!this.persistence) {
+      return;
+    }
+
+    await this.persistence.delete();
+  }
 }
