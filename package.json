@@ -1,6 +1,6 @@
 {
   "name": "drain-ts",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Drain3 log template clustering algorithm in Typescript",
   "keywords": [
     "drain",
