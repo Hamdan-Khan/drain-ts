@@ -2,6 +2,8 @@
 
 TypeScript implementation of the Drain log template clustering algorithm.
 
+More on Drain algorithm: [Drain3](https://github.com/logpai/Drain3)
+
 ## Install
 
 ```bash
